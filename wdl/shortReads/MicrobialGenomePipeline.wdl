@@ -94,7 +94,7 @@ workflow MicrobialGenomePipeline {
       input:
         sample_name = sample_name,
         fastq_1 = select_first([input_fastq1, ""]),
-        fastq_2 = select_first([input_fastq1, ""]),
+        fastq_2 = select_first([input_fastq2, ""]),
         readgroup_name = select_first([readgroup_name, ""]),
         library_name = select_first([library_name, ""]),
         platform_unit = select_first([platform_unit, ""]),
@@ -105,7 +105,7 @@ workflow MicrobialGenomePipeline {
   }
 
 File fastq1 = select_first([input_fastq1, SamToFastq.fastq1])
-File fastq2 = select_first([input_fastq1, SamToFastq.fastq2])
+File fastq2 = select_first([input_fastq2, SamToFastq.fastq2])
 File ubam = select_first([RevertSam.unmapped_bam, FastqToUnmappedBam.output_unmapped_bam])
 Int num_dangling_bases_with_default = select_first([num_dangling_bases, 1])
 File in_bam = select_first([input_bam, AlignToRef.aligned_bam])
